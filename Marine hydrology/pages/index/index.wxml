@@ -1,0 +1,98 @@
+<view class='main'>
+    <view class='top'>
+       <view class='time'>
+          <picker mode="date" value="{{time_index}}" start="2010-01-01" end="2050-01-01" bindchange="bindTimeChange" class='picker'>
+             <view class="picker1">{{time_index}}</view>
+             <image src='./images/time.png' style="width:30rpx;height:34rpx;margin-left:164rpx;top:6rpx;position:absolute"></image>
+          </picker>
+       </view>
+       <view class='province'>
+          <picker bindchange="bindProvinceChange"  value="{{province_index}}" range="{{city1}}" class='picker'>
+             <view class="picker2">{{province_index}}</view>
+             <image src='./images/drop.png' style="width:18rpx;height:16rpx;margin-left:144rpx;top:16rpx;position:absolute"></image>
+          </picker>
+       </view>
+       <view class='port'>
+          <picker bindchange="bindPortChange"  value="{{port_index}}" range="{{portArray}}" class='picker'>
+             <view class="picker3">{{port_index}}</view>
+             <image src='./images/drop.png' style="width:18rpx;height:16rpx;margin-left:144rpx;top:16rpx;position:absolute"></image>
+          </picker>
+       </view>
+     </view>
+     <view class='collection'>
+            <view class='myCollection'>
+               <view class='collectBtn'>
+                   <picker bindchange="bindScang"  value="{{collection_index}}" range="{{collectionArray}}" class='picker'>
+                       <view class="picker2" style='padding-left:10rpx;font-size:20rpx;'>{{collection_index}}</view>
+                       <image src='./images/drop.png' style="width:18rpx;height:16rpx;margin-left:112rpx;top:16rpx;position:absolute"></image>
+                   </picker>
+               </view>
+           </view>
+           <view class='info'>
+             <view class='infoTop' style='text-align:center;'>
+                <text>{{province}}</text>
+                <text style='margin-left:10rpx;'>{{port}}</text>
+                <text style='margin-left:10rpx;'>{{dateTime}}</text>
+             </view>
+             <view class='infoBottom'>
+                <text>农历：{{dataLunarCalendar}}</text>
+                <text style='margin-left:36rpx;'>{{week}}</text>
+             </view>
+           </view>
+           <view class='img'>
+             <image src='./images/collect.png' style="width:54rpx;height:54rpx;" wx:if='{{show}}' bindtap='collection'></image>
+             <image src='./images/collection.png' style="width:54rpx;height:54rpx;" wx:else bindtap='collection'></image>
+           </view>
+       </view>
+    <view class='chart'>
+       <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
+    </view>
+    <view class='tide'>
+       <view class='first'>{{port}}({{time_index}})</view>
+       <view class='fifth'>
+         <view class='table' style='border-left:1px solid #bfbfbf'></view>
+         <view class='table' style='color:{{tableColor[0]}}'>{{tableName[0]}}</view>
+         <view class='table' style='color:{{tableColor[1]}}'>{{tableName[1]}}</view>
+         <view class='table' style='color:{{tableColor[0]}}'>{{tableName[2]}}</view>
+         <view class='table' style='color:{{tableColor[1]}}'>{{tableName[3]}}</view>
+       </view>
+       <view class='second'>
+         <view class='table' style='border-left:1px solid #bfbfbf;color:#07aae3;'>潮时</view>
+         <view class='table' style='color:{{tableColor[0]}}'>{{tidalTimeList[0]}}</view>
+         <view class='table' style='color:{{tableColor[1]}}'>{{tidalTimeList[1]}}</view>
+         <view class='table' style='color:{{tableColor[0]}}'>{{tidalTimeList[2]}}</view>
+         <view class='table' style='color:{{tableColor[1]}}'>{{tidalTimeList[3]}}</view>
+       </view>
+       <view class='three'>
+         <view class='table' style='border-left:1px solid #bfbfbf;color:#07aae3'>潮高(cm)</view>
+         <view class='table' style='color:{{tableColor[0]}}'>{{tidalHeightList[0]}}</view>
+         <view class='table' style='color:{{tableColor[1]}}'>{{tidalHeightList[1]}}</view>
+         <view class='table' style='color:{{tableColor[0]}}'>{{tidalHeightList[2]}}</view>
+         <view class='table' style='color:{{tableColor[1]}}'>{{tidalHeightList[3]}}</view>
+       </view>
+       <view class='four' style='border-top:none'>潮高基准面:在平均海面下{{waterLevel}}cm</view>
+    </view>
+    <view class='weather'>
+      <view class='title'>港口天气：</view>
+      <view class='day'>
+         <text>{{weatherTime1}}（今天）:</text>
+         <text>{{daily_forecast[0].cond_txt_d}}</text><text wx:if='{{daily_forecast[0].cond_txt_d!==daily_forecast[0].cond_txt_n}}' style='margin-left:-28rpx'>转{{daily_forecast[0].cond_txt_n}}</text>
+         <text>{{daily_forecast[0].tmp_min}}-{{daily_forecast[0].tmp_max}}℃</text>
+         <text>{{daily_forecast[0].wind_dir}}{{daily_forecast[0].wind_sc}}级</text>
+      </view>
+      <view class='day'>
+        <text>{{weatherTime2}}（明天）:</text>
+         <text>{{daily_forecast[1].cond_txt_d}}</text><text wx:if='{{daily_forecast[1].cond_txt_d!==daily_forecast[1].cond_txt_n}}' style='margin-left:-28rpx'>转{{daily_forecast[1].cond_txt_n}}</text>
+         <text>{{daily_forecast[1].tmp_min}}-{{daily_forecast[1].tmp_max}}℃</text>
+         <text>{{daily_forecast[1].wind_dir}}{{daily_forecast[1].wind_sc}}级</text>
+      </view>
+      <view class='day'>
+         <text>{{weatherTime3}}（后天）:</text>
+         <text>{{daily_forecast[2].cond_txt_d}}</text><text wx:if='{{daily_forecast[2].cond_txt_d!==daily_forecast[2].cond_txt_n}}' style='margin-left:-28rpx'>转{{daily_forecast[2].cond_txt_n}}</text>
+         <text>{{daily_forecast[2].tmp_min}}-{{daily_forecast[2].tmp_max}}℃</text>
+         <text>{{daily_forecast[2].wind_dir}}{{daily_forecast[2].wind_sc}}级</text>
+      </view>
+    </view> 
+</view>
+
+

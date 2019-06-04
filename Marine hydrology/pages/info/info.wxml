@@ -1,0 +1,31 @@
+<view class='main'>
+   <view class='background'></view>
+   <view class='content'>
+      <view class='content_model' bindtap='click_install'>
+          <view class='style_1'>
+             <image src='./images/az.png' style='width: 80rpx;height: 80rpx;display:block;'></image>
+          </view>
+          <view class='text_title'>北方电子海图</view>
+      </view> 
+      <view class='content_model' bindtap='click_agent'>
+           <view class='style_2'>
+              <image src='./images/dls.png' style='width: 144rpx;height:80rpx;display:block;'></image>
+           </view>
+           <view class='text_title'>航行通告</view>
+      </view>
+   </view>
+    <view class='content_2'>
+      <view class='content_model' bindtap='click_price'>
+          <view class='style_3'>
+             <image src='./images/fldj.png' style='width: 80rpx;height: 80rpx;display:block;'></image>
+          </view>
+          <view class='text_title'>航行警告</view>
+      </view> 
+      <view class='content_model' bindtap='click_complaint'>
+           <view class='style_4'>
+              <image src='./images/ts.png' style='width: 80rpx;height: 80rpx;display:block;'></image>
+           </view>
+           <view class='text_title'>改正通告</view>
+      </view>
+   </view>
+</view>
