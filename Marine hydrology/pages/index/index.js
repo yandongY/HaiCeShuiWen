@@ -3,6 +3,7 @@ var adUrl = app.adUrl;
 var weatherUrl = app.weatherUrl;
 var lineChart = null;
 var wxCharts = require('../../utils/wxcharts.js');
+///////123
 Page({
   data: {
     show:true,
