@@ -322,38 +322,47 @@ Page({
             image: './images/error.png',
             duration: 2000
           })
+        }else{
+          if (res.data.data.tidalTimeList.length > 0 || res.data.data.tidalHeightList.length > 0 || res.data.data.tiemTideList.length > 0 || res.data.data.tiemDateList.length > 0 || res.data.data.tiemHeightTideList.length > 0){
+            lineChart = new wxCharts({
+              canvasId: 'lineCanvas',
+              type: 'line',
+              categories: res.data.data.tiemTideList,
+              animation: true,
+              series: [{
+                name: '潮高',
+                data: res.data.data.tiemHeightTideList,
+                format: function (val, name) {
+                  return val + '厘米';
+                }
+              }],
+              xAxis: {
+                disableGrid: true
+              },
+              yAxis: {
+                title: '潮高 (厘米)',
+                format: function (val) {
+                  return val.toFixed(2);
+                },
+                min: 0
+              },
+              width: (375 * windowW),
+              height: 200,
+              dataLabel: false,
+              dataPointShape: true,
+              extra: {
+                lineStyle: 'curve'
+              },
+            })
+          }else{
+            wx.showToast({
+              image: './images/error.png',
+              title: '暂时无有效数据',
+              duration: 3000,
+            })
+          }
         }
-        lineChart=new wxCharts({
-          canvasId: 'lineCanvas',
-          type: 'line',
-          categories: res.data.data.tiemTideList,
-          animation: true,
-          series: [{
-            name: '潮高',
-            data: res.data.data.tiemHeightTideList,
-            format: function (val, name) {
-              return val+ '厘米';
-            }
-          }],
-          xAxis: {
-            disableGrid: true
-          },
-          yAxis: {
-            title: '潮高 (厘米)',
-            format: function (val) {
-              return val.toFixed(2);
-            },
-            min: 0
-          },
-          width: (375 * windowW),
-          height: 200,
-          dataLabel: false,
-          dataPointShape: true,
-          extra: {
-            lineStyle: 'curve'
-          },
-        });
-        if (res.data.data.tidalHeightList.length == 4) {
+      if (res.data.data.tidalHeightList.length == 4) {
           if (Math.round(res.data.data.tidalHeightList[0]) > Math.round(res.data.data.tidalHeightList[1])) {
             that.setData({
               tiemHeightTideList: res.data.data.tiemHeightTideList,
@@ -675,37 +684,46 @@ Page({
             image: './images/error.png',
             duration: 2000
           })
+        } else {
+          if (res.data.data.tidalTimeList.length > 0 || res.data.data.tidalHeightList.length > 0 || res.data.data.tiemTideList.length > 0 || res.data.data.tiemDateList.length > 0 || res.data.data.tiemHeightTideList.length > 0) {
+            lineChart = new wxCharts({
+              canvasId: 'lineCanvas',
+              type: 'line',
+              categories: res.data.data.tiemTideList,
+              animation: true,
+              series: [{
+                name: '潮高',
+                data: res.data.data.tiemHeightTideList,
+                format: function (val, name) {
+                  return val + '厘米';
+                }
+              }],
+              xAxis: {
+                disableGrid: true
+              },
+              yAxis: {
+                title: '潮高 (厘米)',
+                format: function (val) {
+                  return val.toFixed(2);
+                },
+                min: 0
+              },
+              width: (375 * windowW),
+              height: 200,
+              dataLabel: false,
+              dataPointShape: true,
+              extra: {
+                lineStyle: 'curve'
+              },
+            })
+          } else {
+            wx.showToast({
+              image: './images/error.png',
+              title: '暂时无有效数据',
+              duration: 3000
+            })
+          }
         }
-        lineChart=new wxCharts({
-          canvasId: 'lineCanvas',
-          type: 'line',
-          categories: res.data.data.tiemTideList,
-          animation: true,
-          series: [{
-            name: '潮高',
-            data: res.data.data.tiemHeightTideList,
-            format: function (val, name) {
-              return val + '厘米';
-            }
-          }],
-          xAxis: {
-            disableGrid: true
-          },
-          yAxis: {
-            title: '潮高 (厘米)',
-            format: function (val) {
-              return val.toFixed(2);
-            },
-            min: 0
-          },
-          width: (375 * windowW),
-          height: 200,
-          dataLabel: false,
-          dataPointShape: true,
-          extra: {
-            lineStyle: 'curve'
-          },
-        });
         if (res.data.data.tidalHeightList.length==4){
           if (Math.round(res.data.data.tidalHeightList[0]) > Math.round(res.data.data.tidalHeightList[1])) {
               console.log(1)
@@ -953,43 +971,52 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if(res.data.state==1){
+        if (res.data.state == 1) {
           wx.showToast({
             title: res.data.message,
-            image:'./images/error.png',
+            image: './images/error.png',
             duration: 2000
           })
+        } else {
+          if (res.data.data.tidalTimeList.length > 0 || res.data.data.tidalHeightList.length > 0 || res.data.data.tiemTideList.length > 0 || res.data.data.tiemDateList.length > 0 || res.data.data.tiemHeightTideList.length > 0) {
+            lineChart = new wxCharts({
+              canvasId: 'lineCanvas',
+              type: 'line',
+              categories: res.data.data.tiemTideList,
+              animation: true,
+              series: [{
+                name: '潮高',
+                data: res.data.data.tiemHeightTideList,
+                format: function (val, name) {
+                  return val + '厘米';
+                }
+              }],
+              xAxis: {
+                disableGrid: true
+              },
+              yAxis: {
+                title: '潮高 (厘米)',
+                format: function (val) {
+                  return val.toFixed(2);
+                },
+                min: 0
+              },
+              width: (375 * windowW),
+              height: 200,
+              dataLabel: false,
+              dataPointShape: true,
+              extra: {
+                lineStyle: 'curve'
+              },
+            })
+          } else {
+            wx.showToast({
+              image: './images/error.png',
+              title: '暂时无有效数据',
+              duration: 3000
+            })
+          }
         }
-        lineChart=new wxCharts({
-          canvasId: 'lineCanvas',
-          type: 'line',
-          categories: res.data.data.tiemTideList,
-          animation: true,
-          series: [{
-            name: '潮高',
-            data: res.data.data.tiemHeightTideList,
-            format: function (val, name) {
-              return val + '厘米';
-            }
-          }],
-          xAxis: {
-            disableGrid: true
-          },
-          yAxis: {
-            title: '潮高 (厘米)',
-            format: function (val) {
-              return val.toFixed(2);
-            },
-            min: 0
-          },
-          width: (375 * windowW),
-          height: 200,
-          dataLabel: false,
-          dataPointShape: true,
-          extra: {
-            lineStyle: 'curve'
-          },
-        });
         if (res.data.data.tidalHeightList.length == 4) {
           if (Math.round(res.data.data.tidalHeightList[0]) > Math.round(res.data.data.tidalHeightList[1])) {
             that.setData({
@@ -1188,6 +1215,9 @@ Page({
     });
     //计算屏幕宽度比列
     var windowW = that.data.imageWidth / 375;
+ 
+    // 下面注释的都是不要的
+    /////////////////////////
     //今天日期 
     // var myDate = new Date();
     // var show_day = new Array('星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六');
@@ -1242,37 +1272,46 @@ Page({
             image: './images/error.png',
             duration: 2000
           })
+        } else {
+          if (res.data.data.tidalTimeList.length > 0 || res.data.data.tidalHeightList.length > 0 || res.data.data.tiemTideList.length > 0 || res.data.data.tiemDateList.length > 0 || res.data.data.tiemHeightTideList.length > 0) {
+            lineChart = new wxCharts({
+              canvasId: 'lineCanvas',
+              type: 'line',
+              categories: res.data.data.tiemTideList,
+              animation: true,
+              series: [{
+                name: '潮高',
+                data: res.data.data.tiemHeightTideList,
+                format: function (val, name) {
+                  return val + '厘米';
+                }
+              }],
+              xAxis: {
+                disableGrid: true
+              },
+              yAxis: {
+                title: '潮高 (厘米)',
+                format: function (val) {
+                  return val.toFixed(2);
+                },
+                min: 0
+              },
+              width: (375 * windowW),
+              height: 200,
+              dataLabel: false,
+              dataPointShape: true,
+              extra: {
+                lineStyle: 'curve'
+              },
+            })
+          } else {
+            wx.showToast({
+              image: './images/error.png',
+              title: '暂时无有效数据',
+              duration: 3000
+            })
+          }
         }
-        lineChart=new wxCharts({
-          canvasId: 'lineCanvas',
-          type: 'line',
-          categories: res.data.data.tiemTideList,
-          animation: true,
-          series: [{
-            name: '潮高',
-            data: res.data.data.tiemHeightTideList,
-            format: function (val, name) {
-              return val + '厘米';
-            }
-          }],
-          xAxis: {
-            disableGrid: true
-          },
-          yAxis: {
-            title: '潮高 (厘米)',
-            format: function (val) {
-              return val.toFixed(2);
-            },
-            min: 0
-          },
-          width: (375 * windowW),
-          height: 200,
-          dataLabel: false,
-          dataPointShape: true,
-          extra: {
-            lineStyle: 'curve'
-          },
-        });
         if (res.data.data.tidalHeightList.length == 4) {
           if (Math.round(res.data.data.tidalHeightList[0]) > Math.round(res.data.data.tidalHeightList[1])) {
             that.setData({
